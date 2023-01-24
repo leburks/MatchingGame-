@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>Matching Game</title>
+<style>
+img {
+    width: 8%;
+}
+
+.hide {
+    filter: brightness(0.0);
+}
+
+.show {
+    filter: brightness(1.0);
+}
+
+.body {
+    background-color: #3DB7E4;
+}
+
+</style>
+</head>
+<body>
+<h1>Matching Game</h1>
+<img class="hide" onClick="clicked(this);" src="cards/ace_of_spades.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/10_of_spades.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/8_of_clubs.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/6_of_hearts.png"></img>
+<br>
+<img class="hide" onClick="clicked(this);" src="cards/king_of_clubs.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/queen_of_hearts.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/jack_of_diamonds.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/4_of_diamonds.png"></img>
+<br>
+<img class="hide" onClick="clicked(this);" src="cards/6_of_hearts.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/4_of_diamonds.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/queen_of_hearts.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/jack_of_diamonds.png"></img>
+<br>
+<img class="hide" onClick="clicked(this);" src="cards/10_of_spades.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/8_of_clubs.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/ace_of_spades.png"></img>
+<img class="hide" onClick="clicked(this);" src="cards/king_of_clubs.png"></img>
+<br>
+</body>
+</html>
+<script>
+// Keep track of clicked cards
+card1 = null;
+card2 = null;
+
+var matchSound = new Audio("sounds/match.mp3");
+var noMatchSound = new Audio("sounds/nomatch.mp3");
+
+
+// When a card is clicked do this
+function clicked(card){
+    // Card 1
+    if(card1==null)
+    {
+        card.className = "show";
+        card1 = card;
+    }
+    else if(card2==null)
+    {
+     card.className = "show";
+     card2 = card;
+
+     // Set Timeout
+     setTimeout("checkMatch();", 1000);
+
+    } 
+}
+
+
+// Check if there is a match
+function checkMatch() {
+    // See if card1 is the same as card2
+    if(card1.src==card2.src){
+        matchSound.play();
+
+        // Reset cards
+        card1 = null;
+        card2 = null;
+    }
+    else {
+        noMatchSound.play();
+
+        // Flip the cards back over
+        card1.className = "hide";
+        card2.className = "hide";
+
+        // Reset cards
+        card1 = null;
+        card2 = null;
+    }
+}
+
+</script>
